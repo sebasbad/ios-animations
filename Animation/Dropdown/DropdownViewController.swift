@@ -57,7 +57,7 @@ class DropdownViewController: UIViewController, UITableViewDataSource, UITableVi
     ];
     
     var delegate:DropDownViewControllerDelegate?
-    var reversedAnimationImages: [UIImage] { get { return reverse(animationImages) } }
+    var reversedAnimationImages: [UIImage] { get { return Array(animationImages.reverse()) } }
     var tableHeight: CGFloat { get { return CGFloat(cellHeight * numberOfCells) } }
     var dropdownPressed: ((index: Int) -> Void)?
     var isOpen = false
@@ -126,7 +126,7 @@ class DropdownViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("DropdownOptionCell") as! DropdownOptionCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("DropdownOptionCell") as! DropdownOptionCell
         
         cell.label.text = "Option \(indexPath.row + 1)"
         
