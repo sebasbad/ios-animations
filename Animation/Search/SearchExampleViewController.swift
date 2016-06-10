@@ -82,7 +82,7 @@ class SearchExampleViewController: ExampleNobelViewController, UITextFieldDelega
         
         // grabs the animation frames from the bundle
         for var index = 100; index < 147; index++ {
-            var frameName = String(format: "Loader_00%03d", index)
+            let frameName = String(format: "Loader_00%03d", index)
             loader.animationImages?.append(UIImage(named:frameName)!)
         }
         
@@ -120,7 +120,7 @@ class SearchExampleViewController: ExampleNobelViewController, UITextFieldDelega
     /**
      * Performs all of the animations necessary to display the search results
      * 
-     * :param: results The string to display as the search result
+     * - parameter results: The string to display as the search result
      */
     func showResults(results: String) {
         resultsLabel.text = results
@@ -179,7 +179,7 @@ class SearchExampleViewController: ExampleNobelViewController, UITextFieldDelega
         let animationDelay: NSTimeInterval = 0
 
         UIView.animateWithDuration(animationDuration, delay: animationDelay,
-            options: nil, animations: { () -> Void in
+            options: [], animations: { () -> Void in
             self.itemsView.alpha = 1.0
             self.tableView.alpha = 1.0
         }, completion: nil)
@@ -243,21 +243,21 @@ class SearchExampleViewController: ExampleNobelViewController, UITextFieldDelega
     // MARK: - Text Field
     
     func textChanged() -> Void {
-        self.xButton.hidden = count(self.searchField.text) == 0
+        self.xButton.hidden = self.searchField.text!.characters.count == 0
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
         self.collapseHeader()
         
-        self.xButton.hidden = count(textField.text) == 0
+        self.xButton.hidden = textField.text!.characters.count == 0
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if count(textField.text) < 2 {
+        if textField.text!.characters.count < 2 {
             return false
         }
         
-        search(textField.text)
+        search(textField.text!)
         
         return true
     }

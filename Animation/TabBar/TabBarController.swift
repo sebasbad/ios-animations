@@ -46,16 +46,16 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         tabBar.frame = rect
         
         // set the default and selected icon for each tab bar item
-        (self.tabBar.items?[0] as! UITabBarItem).image = UIImage(named: "dashboard_green")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        (self.tabBar.items?[0] as! UITabBarItem).selectedImage = UIImage(named: "dashboard_white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        (self.tabBar.items?[1] as! UITabBarItem).image = UIImage(named: "stats_green")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        (self.tabBar.items?[1] as! UITabBarItem).selectedImage = UIImage(named: "stats_white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        (self.tabBar.items?[2] as! UITabBarItem).image = UIImage(named: "contacts_green")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        (self.tabBar.items?[2] as! UITabBarItem).selectedImage = UIImage(named: "contacts_white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        (self.tabBar.items?[0])!.image = UIImage(named: "dashboard_green")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        (self.tabBar.items?[0])!.selectedImage = UIImage(named: "dashboard_white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        (self.tabBar.items?[1])!.image = UIImage(named: "stats_green")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        (self.tabBar.items?[1])!.selectedImage = UIImage(named: "stats_white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        (self.tabBar.items?[2])!.image = UIImage(named: "contacts_green")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        (self.tabBar.items?[2])!.selectedImage = UIImage(named: "contacts_white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         
         let indicatorContainerView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 60))
         indicatorContainerView.backgroundColor = MotionStyleKit.motion_Color
-        indicatorContainerView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        indicatorContainerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.sendSubviewToBack(indicatorContainerView)
         view.addSubview(indicatorContainerView)
@@ -94,7 +94,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     // MARK: - Tab Bar
     
-    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem!) {
+    override func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
         
         if item == previousItem {
             return
@@ -102,7 +102,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         if let iv1 = self.indicatorView1 {
             if item == tabBar.items![0] as? UITabBarItem || previousItem == tabBar.items![0] as? UITabBarItem {
-                var translation: CGFloat = item == tabBar.items![0] as! UITabBarItem ? 0 : 60.0
+                let translation: CGFloat = item == tabBar.items![0] ? 0 : 60.0
                 iv1.layer.transform = CATransform3DMakeTranslation(0, 60.0 - translation, 0)
                 ViewAnimator.animateView(iv1, withDuration: 0.4, andEasingFunction: LayoutConstraintEasing.EaseInMTF, toTransform: CATransform3DMakeTranslation(0.0, translation, 0.0))
             }
@@ -110,7 +110,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         if let iv2 = self.indicatorView2 {
             if item == tabBar.items![1] as? UITabBarItem || previousItem == tabBar.items![1] as? UITabBarItem {
-                let translation: CGFloat = item == tabBar.items![1] as! UITabBarItem ? 0 : 60.0
+                let translation: CGFloat = item == tabBar.items![1] ? 0 : 60.0
                 iv2.layer.transform = CATransform3DMakeTranslation(0, 60.0 - translation, 0)
                 ViewAnimator.animateView(iv2, withDuration: 0.4, andEasingFunction: LayoutConstraintEasing.EaseInMTF, toTransform: CATransform3DMakeTranslation(0.0, translation, 0.0))
             }
@@ -119,7 +119,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         if let iv3 = self.indicatorView3 {
             if item == tabBar.items![2] as? UITabBarItem || previousItem == tabBar.items![2] as? UITabBarItem {
-                let translation: CGFloat = item == tabBar.items![2] as! UITabBarItem ? 0 : 60.0
+                let translation: CGFloat = item == tabBar.items![2] ? 0 : 60.0
                 iv3.layer.transform = CATransform3DMakeTranslation(0, 60.0 - translation, 0)
                 ViewAnimator.animateView(iv3, withDuration: 0.4, andEasingFunction: LayoutConstraintEasing.EaseInMTF, toTransform: CATransform3DMakeTranslation(0.0, translation, 0.0))
             }
@@ -135,10 +135,10 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         
         for index in 0...viewControllers!.count - 1 {
             
-            if viewControllers![index] as! UIViewController == fromVC {
+            if viewControllers![index] == fromVC {
                 fromIndex = index
             }
-            if viewControllers![index] as! UIViewController == toVC {
+            if viewControllers![index] == toVC {
                 toIndex = index
             }
         }

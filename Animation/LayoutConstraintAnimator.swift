@@ -45,12 +45,12 @@ class LayoutConstraintAnimator: NSObject {
     The constructor for the animation. Once the animation is created, it is not
     able to be modified or stopped.
     
-    :param: constraints The set of constraints to be animated
-    :param: delay The delay, in seconds, before beginning the animation
-    :param: duration The duration, in seconds, of the animation to be performed
-    :param: toConstants The values of the constants to be set on each of the constraints
-    :param: easing The easing algorithm to be used when calculating the target's values
-    :param: completion The block to be performed on completion of the animation
+    - parameter constraints: The set of constraints to be animated
+    - parameter delay: The delay, in seconds, before beginning the animation
+    - parameter duration: The duration, in seconds, of the animation to be performed
+    - parameter toConstants: The values of the constants to be set on each of the constraints
+    - parameter easing: The easing algorithm to be used when calculating the target's values
+    - parameter completion: The block to be performed on completion of the animation
     */
     required init(constraints: [NSLayoutConstraint], delay:NSTimeInterval,
         duration:NSTimeInterval, toConstants:[CGFloat], easing: LayoutConstraintEasing,
@@ -87,11 +87,11 @@ class LayoutConstraintAnimator: NSObject {
             }
         }
         
-        var time = CGFloat((CACurrentMediaTime() - startTime) / duration)
+        let time = CGFloat((CACurrentMediaTime() - startTime) / duration)
         
         // check to see if the animation has completed
         if time >= 1 {
-            for (index, constraint) in enumerate(constraints) {
+            for (index, constraint) in constraints.enumerate() {
                 constraint.constant = toConstants[index]
             }
             
@@ -106,9 +106,9 @@ class LayoutConstraintAnimator: NSObject {
         }
         
         // process the animation
-        var t = easing.valueFor(CGFloat(time))
+        let t = easing.valueFor(CGFloat(time))
         
-        for (index, constraint) in enumerate(constraints) {
+        for (index, constraint) in constraints.enumerate() {
             constraint.constant = (1 - t) * fromConstants[index] + t * toConstants[index]
         }
     }
